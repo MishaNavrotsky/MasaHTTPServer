@@ -6,6 +6,11 @@ class server {
         this.db = db;
         this.auth = auth;
         this.app = new express();
+        this.app.use((req,res,next)=>{
+            res.locals.db = this.db;
+            res.locals.auth = this.auth;
+            next();
+        })
     }
 
     init(port) {
