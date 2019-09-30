@@ -1,6 +1,6 @@
 class authetication {
     constructor(){
-        console.log("authetication")
+        console.log("Authetication init!............");
     }
 }
 

@@ -1,6 +1,6 @@
 class database {
     constructor(){
-        console.log("database")
+        console.log("Database init!............")
     }
 }
 

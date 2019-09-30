@@ -1,8 +1,8 @@
-import authentication from "./authentication/index.mjs"
-import database from "./database/index.mjs"
-import server from "./server/index.mjs"
+import authentication from "./authentication"
+import database from "./database"
+import server from "./server"
 
-var auth = new authentication();
 var db = new database();
-var ser = new server();
-
+var auth = new authentication(db);
+var ser = new server(db, auth);
+ser.init(1337);
