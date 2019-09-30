@@ -6,6 +6,7 @@ class server {
         this.db = db;
         this.auth = auth;
         this.app = new express();
+        this.requests = new requests({db:this.db, auth:this.auth});
         this.app.use((req,res,next)=>{
             res.locals.db = this.db;
             res.locals.auth = this.auth;
@@ -16,7 +17,7 @@ class server {
     init(port) {
         console.log("Server init!............");
         console.log("ALL REQUESTS !!!!!!!!!!!!!!!!!!!!!!")
-        for (const request of requests) {
+        for (const request of this.requests) {
             console.log(request);
             if (request.get) {
                 this.app.get(request.get.path,request.get.function);
