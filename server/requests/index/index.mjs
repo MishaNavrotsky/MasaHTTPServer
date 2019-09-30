@@ -1,5 +1,6 @@
 import express from "express"
 import request from "../request"
+
 class index extends request {
     constructor() {
         super();
