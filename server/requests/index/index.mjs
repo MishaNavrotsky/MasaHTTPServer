@@ -1,12 +1,14 @@
 import express from "express"
-
-var index = {
-    name:"index",
-    get: {
-        path: "/",
-        function: function (req, res) {
-            res.send("AMMA INDEX");
-            res.end();
+import request from "../request"
+class index extends request {
+    constructor() {
+        super();
+        this.get = {
+            path: "/",
+            function: function (req, res) {
+                res.send("AMMA INDEX");
+                res.end();
+            }
         }
     }
 }

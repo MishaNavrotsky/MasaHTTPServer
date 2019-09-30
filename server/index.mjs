@@ -1,5 +1,6 @@
 import express from 'express'
 import requests from './requests'
+import _ from "lodash"
 
 class server {
     constructor(db = {}, auth = {}) {
@@ -7,11 +8,6 @@ class server {
         this.auth = auth;
         this.app = new express();
         this.requests = new requests({db:this.db, auth:this.auth});
-        this.app.use((req,res,next)=>{
-            res.locals.db = this.db;
-            res.locals.auth = this.auth;
-            next();
-        })
     }
 
     init(port) {
@@ -19,10 +15,11 @@ class server {
         console.log("ALL REQUESTS !!!!!!!!!!!!!!!!!!!!!!")
         for (const request of this.requests) {
             console.log(request);
-            if (request.get) {
+            let obj = request.toObject();
+            if (!_.isEmpty(obj.get)) {
                 this.app.get(request.get.path,request.get.function);
             } 
-            if (requests.post) {
+            if (!_.isEmpty(obj.post)) {
                 this.app.post(request.post.path,request.post.function);
             }
         }
