@@ -1,5 +1,7 @@
 import mongoose from "mongoose"
-import { User } from "./schemas/user"
+import {
+    User
+} from "./schemas/user"
 
 class database {
     constructor(connectionString) {
@@ -25,7 +27,18 @@ class database {
         if (user.constructor.modelName !== "User") {
             throw "createUser object is not type of User";
         }
-        user.save().catch(error=>{console.log(error.message); return error;});
+        return user.save().catch(error => {
+            console.log(error.message);
+            throw error;
+        });
+    }
+
+
+    checkUser(user) {
+        return User.findOne({
+            username: user.username,
+            password: user.password
+        });
     }
 }
 

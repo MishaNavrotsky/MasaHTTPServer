@@ -8,7 +8,8 @@ class def extends request {
             path: /.+/,
             function: function (req, res) {
                 res.send({
-                    "Error": "Not found"
+                    status : "error",
+                    message: "Not found"
                 });
                 res.end();
             }

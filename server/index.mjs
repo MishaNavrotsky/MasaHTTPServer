@@ -1,5 +1,6 @@
 import express from 'express'
 import requests from './requests'
+import bodyParser from 'body-parser'
 import _ from "lodash"
 
 class server {
@@ -7,6 +8,8 @@ class server {
         this.db = db;
         this.auth = auth;
         this.app = new express();
+        //TODO not good shit
+        this.app.use(bodyParser.json());
         this.requests = new requests({
             db: this.db,
             auth: this.auth
@@ -17,7 +20,8 @@ class server {
         console.log("Server init!............");
         console.log("ALL REQUESTS !!!!!!!!!!!!!!!!!!!!!!")
         for (const request of this.requests) {
-            console.log(request);
+            const disp = {...request}
+            console.log(`${request.constructor.name}: { ${disp.get ? "get: " + disp.get.path + " " : ""}${disp.post ? "post: " + disp.post.path : ""} }`);
             if (!_.isEmpty(request.get)) {
                 this.app.get(request.get.path, request.get.function);
             }
