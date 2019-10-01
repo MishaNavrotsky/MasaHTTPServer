@@ -1,1 +1,1 @@
-node --experimental-modules main.mjs
+node --experimental-modules --no-deprecation main.mjs

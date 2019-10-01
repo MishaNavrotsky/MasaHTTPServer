@@ -19,9 +19,17 @@ class register extends request {
                     })
                     res.end();
                 }).catch(err => {
+                    let messages = [];
+                    for(const i in err.errors) {
+                        if(err.errors[i].name==="ValidatorError"){
+                            messages.push(err.errors[i].message);
+                        }
+                    }
+                    console.log(messages);
                     res.send({
                         status: "error",
-                        message: "user cannot be created"
+                        message: "validation error",
+                        messages: messages
                     })
                 })
             }
