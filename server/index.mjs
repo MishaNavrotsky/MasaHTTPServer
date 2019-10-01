@@ -7,7 +7,10 @@ class server {
         this.db = db;
         this.auth = auth;
         this.app = new express();
-        this.requests = new requests({db:this.db, auth:this.auth});
+        this.requests = new requests({
+            db: this.db,
+            auth: this.auth
+        });
     }
 
     init(port) {
@@ -15,12 +18,11 @@ class server {
         console.log("ALL REQUESTS !!!!!!!!!!!!!!!!!!!!!!")
         for (const request of this.requests) {
             console.log(request);
-            let obj = request.toObject();
-            if (!_.isEmpty(obj.get)) {
-                this.app.get(request.get.path,request.get.function);
-            } 
-            if (!_.isEmpty(obj.post)) {
-                this.app.post(request.post.path,request.post.function);
+            if (!_.isEmpty(request.get)) {
+                this.app.get(request.get.path, request.get.function);
+            }
+            if (!_.isEmpty(request.post)) {
+                this.app.post(request.post.path, request.post.function);
             }
         }
         console.log("ALL REQUESTS !!!!!!!!!!!!!!!!!!!!!!")
