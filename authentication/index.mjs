@@ -3,8 +3,8 @@ class authetication {
         console.log("Authetication init!............");
     }
 
-    test(){
-        console.log("auth");
+    init(){
+        
     }
 }
 
