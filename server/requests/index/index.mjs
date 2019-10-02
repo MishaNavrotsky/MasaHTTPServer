@@ -4,13 +4,14 @@ import request from "../request"
 class index extends request {
     constructor() {
         super();
-        this.get = {
+        this.get.merge({
+            auth: false,
             path: "/",
-            function: function (req, res) {
+            function:  (req, res) => {
                 res.send("AMMA INDEX");
                 res.end();
             }
-        }
+        });
     }
 }
 

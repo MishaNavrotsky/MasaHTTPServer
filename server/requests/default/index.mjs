@@ -4,16 +4,16 @@ import request from "../request"
 class def extends request {
     constructor() {
         super();
-        this.get = {
+        this.get.merge({
             path: /.+/,
-            function: function (req, res) {
-                res.send({
-                    status : "error",
+            function: (req, res) => {
+                res.status(404).send({
+                    status: "error",
                     message: "Not found"
                 });
                 res.end();
             }
-        }
+        });
     }
 }
 

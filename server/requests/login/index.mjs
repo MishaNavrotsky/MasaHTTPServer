@@ -1,12 +1,16 @@
 import express from "express"
 import request from "../request"
+import bodyParser from 'body-parser'
 import {User} from "../../../database/schemas/user"
 
 class login extends request {
     constructor(lib) {
         super();
         this.db = lib.db;
-        this.post = {
+        this.post.merge({
+            ...this.post,
+            auth:false,
+            middleware: bodyParser.json(),
             path: "/login",
             function: (req, res) => {
                 const user = new User(req.body);
@@ -25,7 +29,7 @@ class login extends request {
                     res.end();
                 })
             }
-        }
+        })
     }
 }
 export default login;

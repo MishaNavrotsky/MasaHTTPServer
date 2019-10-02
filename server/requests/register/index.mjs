@@ -1,5 +1,6 @@
 import express from "express"
 import request from "../request"
+import bodyParser from 'body-parser'
 import {
     User
 } from "../../../database/schemas/user"
@@ -8,7 +9,10 @@ class register extends request {
     constructor(lib) {
         super();
         this.db = lib.db;
-        this.post = {
+        this.auth = false;
+        this.post.merge({
+            auth: false,
+            middleware: bodyParser.json(),
             path: "/register",
             function: (req, res) => {
                 const user = new User(req.body);
@@ -25,7 +29,6 @@ class register extends request {
                             messages.push(err.errors[i].message);
                         }
                     }
-                    console.log(messages);
                     res.send({
                         status: "error",
                         message: "validation error",
@@ -33,7 +36,7 @@ class register extends request {
                     })
                 })
             }
-        }
+        })
     }
 }
 export default register;
