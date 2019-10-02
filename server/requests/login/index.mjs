@@ -8,7 +8,6 @@ class login extends request {
         super();
         this.db = lib.db;
         this.post.merge({
-            ...this.post,
             auth:false,
             middleware: bodyParser.json(),
             path: "/login",
