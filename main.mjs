@@ -9,5 +9,5 @@ import fs from "fs"
     var auth = new authentication(db);
     auth.init(fs.readFileSync("secret.txt"));
     var ser = new server(db, auth);
-    ser.init(1337);
+    ser.init(process.env.DOMEN | 1337);
 })();
