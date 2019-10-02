@@ -7,6 +7,7 @@ class def extends request {
         this.get.merge({
             path: /.+/,
             function: (req, res) => {
+                console.log(req.user);
                 res.status(404).send({
                     status: "error",
                     message: "Not found"

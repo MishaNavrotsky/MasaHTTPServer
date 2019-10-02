@@ -13,6 +13,8 @@ class server {
         });
     }
 
+
+
     init(port) {
         console.log("Server init!............");
         //check all requests for using auth jwt
@@ -21,9 +23,11 @@ class server {
             notAuthArr.push(request.notAuthPathes);
         }
         notAuthArr = _.flattenDeep(notAuthArr);
-        this.app.use(this.auth.jwt.unless({
+        this.app.use(this.auth.expressJwt.unless({
             path: notAuthArr
         }));
+        //auth error handler
+        this.app.use(this.auth.errorHandler);
         //init express routes
         for (const request of this.requests) {
             const disp = {
