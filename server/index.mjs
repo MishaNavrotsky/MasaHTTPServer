@@ -23,7 +23,7 @@ class server {
         notAuthArr = _.flattenDeep(notAuthArr);
         this.app.use(this.auth.jwt.unless({
             path: notAuthArr
-        }).catch());
+        }));
         //init express routes
         for (const request of this.requests) {
             const disp = {
