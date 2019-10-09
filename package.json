@@ -2,11 +2,11 @@
     "name": "masahttpserver",
     "version": "0.0.0",
     "engines": {
-        "node": "10.x"
+        "node": "latest"
     },
     "main": "main.mjs",
     "scripts": {
-        "install": "(cd server && npm install); (cd authentication && npm install); (cd database && npm install)",
+        "postinstall": "(cd server && npm install); (cd authentication && npm install); (cd database && npm install)",
         "start": "node --experimental-modules --no-deprecation main.mjs"
     },
     "license": "MIT"
