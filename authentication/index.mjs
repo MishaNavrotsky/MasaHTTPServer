@@ -8,7 +8,7 @@ class authetication {
 
     init(secret) {
         this.secret = secret;
-        this.expressJwt = expressJwt({
+        this.expressModule = expressJwt({
             secret: secret,
             expiresIn: "2h",
             getToken: function fromHeaderOrQuerystring(req) {

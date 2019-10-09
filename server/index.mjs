@@ -23,7 +23,7 @@ class server {
             notAuthArr.push(request.notAuthPathes);
         }
         notAuthArr = _.flattenDeep(notAuthArr);
-        this.app.use(this.auth.expressJwt.unless({
+        this.app.use(this.auth.expressModule.unless({
             path: notAuthArr
         }));
         //auth error handler
