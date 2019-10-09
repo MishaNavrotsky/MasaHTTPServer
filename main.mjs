@@ -4,10 +4,12 @@ import server from "./server"
 import fs from "fs"
 
 const PORT = process.env.PORT || 5000
+const MONGODBSTRING = "mongodb://juju577:noV123ch@ds233198.mlab.com:33198/heroku_83f1b22l" 
 
-var db = new database("mongodb://localhost:27017/local");
-await db.init();
-var auth = new authentication(db);
-auth.init(fs.readFileSync("secret.txt"));
-var ser = new server(db, auth);
-ser.init(PORT);
+const db = new database(MONGODBSTRING);
+db.init().then(() => {
+    const auth = new authentication(db);
+    auth.init(fs.readFileSync("secret.txt"));
+    const ser = new server(db, auth);
+    ser.init(PORT);
+});
