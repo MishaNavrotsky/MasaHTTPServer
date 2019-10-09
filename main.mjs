@@ -24,3 +24,5 @@ const PORT = process.env.PORT || 5000
     console.log(123);
 
 })();
+
+setInterval(()=>console.log(123),1000);
