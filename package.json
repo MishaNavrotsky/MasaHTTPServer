@@ -2,7 +2,7 @@
     "name": "masahttpserver",
     "version": "0.0.0",
     "engines": {
-        "node": "latest"
+        "node": "10.x"
     },
     "main": "main.mjs",
     "scripts": {
