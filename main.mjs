@@ -5,7 +5,7 @@ import fs from "fs"
 
 const PORT = process.env.PORT || 5000
 
-(async function () {
+// (async function () {
     console.log(123);
     var db = new database("mongodb://localhost:27017/local");
     // await db.init();
@@ -23,6 +23,4 @@ const PORT = process.env.PORT || 5000
     ser.init(PORT);
     console.log(123);
 
-})();
-
-setInterval(()=>console.log(123),1000);
+// })();
