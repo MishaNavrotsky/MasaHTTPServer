@@ -5,9 +5,9 @@
     "engines": {
       "node": "10.x"
     },
-    "main": "index.mjs",
+    "main": "main.mjs",
     "scripts": {
-      "start": "node --experimental-modules --no-deprecation index.mjs",
+      "start": "node --experimental-modules --no-deprecation main.mjs",
       "test": "node test.js"
     },
     "license": "MIT"
