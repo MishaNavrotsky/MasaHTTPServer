@@ -7,7 +7,7 @@
     },
     "main": "index.mjs",
     "scripts": {
-      "start": "sh start.sh",
+      "start": "node --experimental-modules --no-deprecation index.mjs",
       "test": "node test.js"
     },
     "license": "MIT"
