@@ -1,0 +1,14 @@
+{
+    "name": "masahttpserver",
+    "version": "0.3.0",
+    "description": "A sample Node.js app using Express 4",
+    "engines": {
+      "node": "10.x"
+    },
+    "main": "index.mjs",
+    "scripts": {
+      "start": "sh start.sh",
+      "test": "node test.js"
+    },
+    "license": "MIT"
+  }
