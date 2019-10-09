@@ -10,9 +10,9 @@ class authetication {
         this.secret = secret;
         this.expressModule = expressJwt({
             secret: secret,
-            expiresIn: "2h",
-            getToken: function fromHeaderOrQuerystring(req) {
-                const cookies = req.headers.cookie.split(";");
+            expiresIn: "2",
+            getToken: (req) => {
+                const cookies = req.headers.cookie ? req.headers.cookie.split(";") : [];
                 for(let i of cookies){
                     if(i.replace(/ /g,"").startsWith("token=")){
                         return i.substring(i.indexOf("=")+1);
@@ -31,8 +31,9 @@ class authetication {
             });
             res.end();
             return;
+        } else {
+            throw err;
         }
-        next();
     }
 
     generateToken(user) {
