@@ -1,5 +1,7 @@
 import express from 'express'
 import requests from './requests'
+import wsrequests from './wsrequests'
+
 import _ from "lodash"
 
 class server {
@@ -11,13 +13,24 @@ class server {
             db: this.db,
             auth: this.auth
         });
+        this.wsrequests = new wsrequests({
+            db: this.db
+        });
     }
 
 
 
     init(port) {
+        //CORS
+        this.app.use((req, res, next) => {
+            res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
+
         console.log("Server init!............");
-        //check all requests for using auth jwt
+        //check all requests for using auth 
+        console.log("Server auth init........")
         let notAuthArr = [];
         for (const request of this.requests) {
             notAuthArr.push(request.notAuthPathes);
@@ -28,25 +41,13 @@ class server {
         }));
         //auth error handler
         this.app.use(this.auth.errorHandler);
+        //init ws routes
+        console.log("WS init...........");
+        this.wsrequests.init(this.app, "/websocket");
+
         //init express routes
-        for (const request of this.requests) {
-            const disp = {
-                ...request
-            }
-            console.log(`${request.constructor.name}: { ${disp.get ? "get: " + disp.get.path + " " : ""}${disp.post ? "post: " + disp.post.path : ""} }`);
-            if (request.get.changed) {
-                if (!_.isEmpty(request.get.middleware) || _.isFunction(request.get.middleware))
-                    this.app.get(request.get.path, request.get.middleware, request.get.function);
-                else
-                    this.app.get(request.get.path, request.get.function);
-            }
-            if (request.post.changed) {
-                if (!_.isEmpty(request.post.middleware) || _.isFunction(request.post.middleware))
-                    this.app.post(request.post.path, request.post.middleware, request.post.function);
-                else
-                    this.app.post(request.post.path, request.post.function);
-            }
-        }
+        console.log("Requests init.........");
+        this.requests.init(this.app);
         this.app.listen(port);
     }
 }
