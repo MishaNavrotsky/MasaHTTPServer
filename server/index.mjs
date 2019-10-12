@@ -1,6 +1,7 @@
 import express from 'express'
 import requests from './requests'
 import wsrequests from './wsrequests'
+import cors from "cors"
 
 import _ from "lodash"
 
@@ -8,7 +9,7 @@ class server {
     constructor(db = {}, auth = {}) {
         this.db = db;
         this.auth = auth;
-        this.app = new express();
+        this.app = new express().use("*",cors());
         this.requests = new requests({
             db: this.db,
             auth: this.auth
