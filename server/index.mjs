@@ -9,7 +9,13 @@ class server {
     constructor(db = {}, auth = {}) {
         this.db = db;
         this.auth = auth;
-        this.app = new express().use("*",cors());
+        this.app = new express().use(cors({
+            origin: (origin, cb)=>{
+                return cb(null, true);
+            },
+            optionsSuccessStatus: 200,
+            credentials: true
+        }));
         this.requests = new requests({
             db: this.db,
             auth: this.auth
