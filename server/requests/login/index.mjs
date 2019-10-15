@@ -22,7 +22,7 @@ class login extends request {
                     if (result) {
                         res.cookie('token', token, {httpOnly:true}).send({
                             status: "ok",
-                            token: token
+                            // token: token
                         })
                     } else {
                         res.status(401).send({

@@ -23,7 +23,7 @@ class register extends request {
                     });
                     res.cookie('token', token, {httpOnly:true}).send({
                         status: "ok",
-                        token: token
+                        // token: token
                     })
                     res.end();
                 }).catch(err => {
