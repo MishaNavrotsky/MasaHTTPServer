@@ -22,7 +22,8 @@ class register extends request {
                         password: user.password
                     });
                     res.cookie('token', token, {httpOnly:true}).send({
-                        status: "ok"
+                        status: "ok",
+                        token: token
                     })
                     res.end();
                 }).catch(err => {
