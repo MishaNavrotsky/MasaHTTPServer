@@ -10,10 +10,7 @@ class server {
         this.db = db;
         this.auth = auth;
         this.app = new express().use(cors({
-            origin: (origin, cb)=>{
-                return cb(null, true);
-            },
-            optionsSuccessStatus: 200,
+            origin: "http://localhost:3000",
             credentials: true
         }));
         this.requests = new requests({
