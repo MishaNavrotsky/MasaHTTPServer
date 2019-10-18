@@ -8,7 +8,6 @@ class messages extends wsrequest {
     constructor(obj) {
         super();
         this.db = obj.db
-        this.usersConnected = obj.usersConnected;
         this.path = "sendMessage"
         this.message.merge({
             function: (obj, ws, req, usersConnected) => {

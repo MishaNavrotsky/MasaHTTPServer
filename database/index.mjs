@@ -65,6 +65,17 @@ class database {
             skip
         }).exec();
     }
+
+    findUnreceivedMessages(username){
+        return Message.find({
+            to:username,
+            received:false
+        }, "data from sendDate -_id").exec();
+    }
+ 
+    setMessagesReceived(to){
+        return Message.updateMany({to}, { received: true }).exec(); 
+    }
 }
 
 export default database;

@@ -1,5 +1,7 @@
 import expressWebSocket from 'express-ws'
 import messages from "./messages"
+import recieveMessages from "./receiveMessages"
+import findMessages from "./findMessages"
 import _ from "lodash"
 
 
@@ -12,7 +14,7 @@ class WSConnection extends Object {
 class wsrequests extends Array {
     constructor(obj) {
         super();
-        this.push(new messages(obj));
+        this.push(new messages(obj), new recieveMessages(obj), new findMessages(obj));
         this.usersConnected = [];
     }
 
