@@ -16,12 +16,12 @@ class findMessages extends wsrequest {
                     to,
                     skip
                 } = obj;
-                const data = [];
+                const data = {};
                 this.db.findMessages(req.user.username, to, skip).then(messages => {
-                    data.push(messages);
+                    data.to = messages;
                     return this.db.findMessages(to, req.user.username, skip)
                 }).then(messages => {
-                    data.push(messages);
+                    data.from = messages;
                     ws.send(JSON.stringify({
                         status: "ok",
                         data
