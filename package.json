@@ -7,7 +7,8 @@
     "main": "main.mjs",
     "scripts": {
         "postinstall": "(cd server && npm install); (cd authentication && npm install); (cd database && npm install)",
-        "start": "node --experimental-modules --no-deprecation main.mjs"
+        "start": "node --experimental-modules --no-deprecation main.mjs",
+        "debug": "npm install; nodemon --experimental-modules --no-deprecation main.mjs"
     },
     "license": "MIT"
 }

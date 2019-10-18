@@ -2,7 +2,9 @@ import mongoose from "mongoose"
 import {
     User
 } from "./schemas/user"
-
+import {
+    Message
+} from "./schemas/message"
 class database {
     constructor(connectionString) {
         console.log("Database init!............");
@@ -39,6 +41,29 @@ class database {
             username: user.username,
             password: user.password
         });
+    }
+
+    addMessage(message) {
+        if (message.constructor.modelName !== "Message") {
+            throw "addMessage object is not type of Message";
+        }
+        return message.save().catch(error => {
+            console.log(error.message);
+            throw error;
+        });
+    }
+
+    findMessages(from, to, skip) {
+        return Message.find({
+            from,
+            to
+        }, "data received sendDate -_id", {
+            sort: {
+                sendDate: -1
+            },
+            limit:20,
+            skip
+        }).exec();
     }
 }
 
